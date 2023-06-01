@@ -46,7 +46,21 @@ const requestHandler = (req, res) => {
     console.log("creat a new book");
 
     // handle the request here;
-    const boolName = Number(req.url.slice(7));
+    const bookName = Number(req.url.slice(7));
+    let myid = creatBook(bookName);
+    if(myid){
+            res.writeHead(200, {
+        "Content-Type": "text/plain",
+      });
+      res.end("the book was created successfully with id: "+myid);
+    }
+    else{
+        res.writeHead(500, {
+            "Content-Type": "text/plain",
+          });
+          res.end("there was an Error on the server: ");
+    }
+
   }
 
   return "error";
@@ -70,4 +84,11 @@ function getBookIndex(id){
     }
     console.log("not found ");
     return false;
+}
+
+function creatBook (name){
+
+
+
+
 }
