@@ -1,5 +1,23 @@
 {
-    
-    "type": "module"
-    
+  "type": "module",
+  "name": "package",
+  "version": "1.0.0",
+  "description": "my second project",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JSD-0423/Qusai-Issa-NodeJS-sec.git"
+  },
+  "author": "Qusai Issa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JSD-0423/Qusai-Issa-NodeJS-sec/issues"
+  },
+  "homepage": "https://github.com/JSD-0423/Qusai-Issa-NodeJS-sec#readme",
+  "dependencies": {
+    "nodemon": "^2.0.22"
   }
+}
