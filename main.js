@@ -19,23 +19,29 @@ const requestHandler = (req, res) => {
   if (req.method === "GET" && req.url.startsWith("/books/")) {
     // handle the request here;
     const myid = Number(req.url.slice(7));
+    let bookIndex = getBookIndex(myid);
+    if(bookIndex){
+        res.writeHead(302, {
+          "Content-Type": "application/json",
+        });
+        res.write(JSON.stringify(booksList[bookIndex]));
+    }
+    else{
+        res.writeHead(200, {
+            "Content-Type": "text/plain",
+          });
+          res.write("Sorry but we can't find that book");
 
-    res.writeHead(302, {
-      "Content-Type": "application/json",
-    });
-    res.write(JSON.stringify(booksList[myid]));
-
+    }
     //res.status(200).send({recipeNames})
 
     res.end();
   } else if (req.method === "GET" && req.url.startsWith("/books")) {
-    // handle the request here;
-    console.log("return all books");
+    res.writeHead(302, {
+        "Content-Type": "application/json",
+      });
+      res.write(JSON.stringify(booksList));
 
-    const myid = Number(req.url.slice(7));
-    console.log(req.url);
-    console.log(myid);
-    return redirect(request, response, "books");
   } else if (req.method === "POST" && req.url.startsWith("/books/")) {
     console.log("creat a new book");
 
@@ -49,3 +55,19 @@ const server = http.createServer(requestHandler);
 server.listen(port, host, () => {
   console.log(`Server is running on http://${host}:${port}`);
 });
+
+function getBookIndex(id){
+    console.log('myid '+ id);
+
+    for(let i = 0 ; i < booksList.length;i++){
+        console.log(i+": "+booksList[i].id);
+
+        if(booksList[i].id == id){
+            console.log("found at "+i);
+            return i;
+        }
+
+    }
+    console.log("not found ");
+    return false;
+}
