@@ -1,13 +1,11 @@
-let tempId = 0;
-
-function generatId() {
+/*function generatId() {
   tempId++;
   return tempId;
-}
+}*/
 
 export class Book {
-  constructor(value) {
-    this.id = generatId();
+  constructor(id, value) {
+    this.id = id;
     this.name = value;
   }
 }

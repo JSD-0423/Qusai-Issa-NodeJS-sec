@@ -4,8 +4,8 @@ const require = createRequire(import.meta.url);
 const fs = require("fs");
 const path = require("path");
 
-export function readJSONFile(filePath) {
-  const relativePath = path.relative("./", `data/${filePath}`);
+export function readJSONFile(fileName) {
+  const relativePath = path.relative("./", `data/${fileName}`);
 
   if (!fs.existsSync(relativePath)) {
     fs.writeFileSync(relativePath, "[]", "utf8");
@@ -14,4 +14,11 @@ export function readJSONFile(filePath) {
 
   const fileContents = fs.readFileSync(relativePath, "utf8");
   return { data: JSON.parse(fileContents), status: 200 };
+}
+
+export function updateFile(fileName, data) {
+  const relativePath = path.relative("./", `data/${fileName}`);
+  data = JSON.stringify(data);
+  fs.writeFileSync(relativePath, data);
+  console.log("File Created Successfully");
 }
